@@ -1,0 +1,78 @@
+AVL:
+difference in height between left to be must always be <= 1
+
+AVL Trees:
+class Node<T> {
+	T data;
+	Node<T> left;
+	Node<T> right;
+	Node<T> parent;
+	Public Node(T obj){
+		data=obj;
+		parent = left = right = null;
+		}
+}
+
+public AVLTree (){
+	root = null;
+	currentSize = 0;
+}
+
+public void add(E obj){
+	Node<E> node = new Node<E>(obj);
+	if(root == null){ //first node we add
+		root = node;
+		currentSize++;
+		return;
+	}
+	add(root,node);
+}
+
+public void add(Node<E> parent, Node<E> newNode){
+	if(((Comparable<E>)newNode.data.compareTo(parent.data)>0){
+		if(parent.right == null){
+			parent.right = newNode;
+			newNode.parent = parent;
+			currentSize++;
+		}
+		else {
+			add(parent.right,newNode);
+		}
+	}
+	else{
+		if(parent.left == null){
+			parent.left = newNode;
+			newNode.parent = parent;
+			currentSize++;
+		}
+	}
+	checkBalance(newNode);
+}
+
+public void checkBalance(Node<E> node){
+	if((height(node.left) - height(node.right) > 1 ) || (height(node.left) - height(node.right) < -1))
+		rebalance(node);
+	if (node.parent == null)
+		return;
+	checkBalance(node.parent);
+}
+
+public void rebalance(Node<E> node){
+	if(height(node.left)-height(node.right)>1){
+		if(height(node.left.left) > height(node.left.right)
+			node = rightRotate(node);
+		else
+			node = leftRightRotate(node);
+	}
+	else{
+		if(height(node.right.left) > height(node.right.right) 
+			node = rightRotate(node);
+		else
+			node = leftRightRotate(node);
+	}
+	if(node.parent == null)
+		root = node;
+}
+
+
+https://www.youtube.com/watch?v=nMExd4DthdA&index=64&list=PLpPXw4zFa0uKKhaSz87IowJnOTzh9tiBk
